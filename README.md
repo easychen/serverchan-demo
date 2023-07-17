@@ -2,6 +2,8 @@
 
 借助于 GPT 我们编写了多种语言的Server酱调用实例。包括
 
+- C
+- C#
 - Dart
 - Go
 - Java
