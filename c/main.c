@@ -29,7 +29,13 @@ void sc_send(SCData* data) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
     if (curl) {
-        snprintf(url, MAX_BUFFER_SIZE, "https://sctapi.ftqq.com/%s.send", data->key);
+        // 判断 sendkey 是否以 "sctp" 开头，并选择对应的 URL
+        if (strncmp(data->key, "sctp", 4) == 0) {
+            snprintf(url, MAX_BUFFER_SIZE, "https://%s.push.ft07.com/send", data->key);
+        } else {
+            snprintf(url, MAX_BUFFER_SIZE, "https://sctapi.ftqq.com/%s.send", data->key);
+        }
+        
         snprintf(post_data, MAX_BUFFER_SIZE, "text=%s&desp=%s", data->text, data->desp);
 
         curl_easy_setopt(curl, CURLOPT_URL, url);

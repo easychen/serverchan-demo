@@ -11,7 +11,15 @@ function sc_send() {
         "--data" "$postdata"
     )
 
-    result=$(curl -X POST -s -o /dev/null -w "%{http_code}" "https://sctapi.ftqq.com/$key.send" "${opts[@]}")
+    # 判断 key 是否以 "sctp" 开头，选择不同的 URL
+    if [[ "$key" == sctp* ]]; then
+        url="https://${key}.push.ft07.com/send"
+    else
+        url="https://sctapi.ftqq.com/${key}.send"
+    fi
+
+    # 使用动态生成的 url 发送请求
+    result=$(curl -X POST -s -o /dev/null -w "%{http_code}" "$url" "${opts[@]}")
     echo "$result"
 }
 

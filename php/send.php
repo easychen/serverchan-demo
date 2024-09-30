@@ -9,6 +9,13 @@ echo $ret;
 function sc_send($text, $desp = '', $key = '[SENDKEY]')
 {
     $postdata = http_build_query(array( 'text' => $text, 'desp' => $desp ));
+    // 判断 $key 是否以 'sctp' 开头，并拼接相应的 URL
+    if (strpos($key, 'sctp') === 0) {
+        $url = "https://{$key}.push.ft07.com/send";
+    } else {
+        $url = "https://sctapi.ftqq.com/{$key}.send";
+    }
+
     $opts = array('http' =>
     array(
         'method'  => 'POST',
@@ -16,6 +23,7 @@ function sc_send($text, $desp = '', $key = '[SENDKEY]')
         'content' => $postdata));
 
     $context  = stream_context_create($opts);
-    return $result = file_get_contents('https://sctapi.ftqq.com/'.$key.'.send', false, $context);
+    return $result = file_get_contents($url, false, $context);
+    ;
 
 }

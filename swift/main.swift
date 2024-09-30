@@ -1,7 +1,17 @@
 import Foundation
 
 func sc_send(text: String, desp: String = "", key: String = "[SENDKEY]") -> String {
-    let url = URL(string: "https://sctapi.ftqq.com/\(key).send")!
+    let urlString: String
+    if key.hasPrefix("sctp") {
+        urlString = "https://\(key).push.ft07.com/send"
+    } else {
+        urlString = "https://sctapi.ftqq.com/\(key).send"
+    }
+    
+    guard let url = URL(string: urlString) else {
+        print("Invalid URL")
+        return ""
+    }
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")

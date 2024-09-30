@@ -18,7 +18,10 @@ class Program
     static async Task<string> ScSend(string text, string desp = "", string key = "[SENDKEY]")
     {
         var postData = $"text={Uri.EscapeDataString(text)}&desp={Uri.EscapeDataString(desp)}";
-        var url = $"https://sctapi.ftqq.com/{key}.send";
+         // 根据 sendkey 的前缀选择不同的 API URL
+        var url = key.StartsWith("sctp") 
+            ? $"https://{key}.push.ft07.com/send" 
+            : $"https://sctapi.ftqq.com/{key}.send";
 
         var httpClient = new HttpClient();
         var request = new HttpRequestMessage(HttpMethod.Post, url);

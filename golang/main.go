@@ -51,8 +51,16 @@ func scSend(text string, desp string, key string) string {
 	data.Set("text", text)
 	data.Set("desp", desp)
 
+	// 根据 sendkey 是否以 "sctp" 开头决定 API 的 URL
+	var apiUrl string
+	if strings.HasPrefix(key, "sctp") {
+		apiUrl = fmt.Sprintf("https://%s.push.ft07.com/send", key)
+	} else {
+		apiUrl = fmt.Sprintf("https://sctapi.ftqq.com/%s.send", key)
+	}
+
 	client := &http.Client{}
-	req, err := http.NewRequest("POST", fmt.Sprintf("https://sctapi.ftqq.com/%s.send", key), strings.NewReader(data.Encode()))
+	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(data.Encode()))
 	if err != nil {
 		return err.Error()
 	}

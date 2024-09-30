@@ -15,7 +15,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 async fn sc_send(text: String, desp: String, key: String) -> Result<String, Box<dyn std::error::Error>> {
     let params = [("text", text), ("desp", desp)];
     let post_data = serde_urlencoded::to_string(params)?;
-    let url = format!("https://sctapi.ftqq.com/{}.send", key);
+    // 修改 URL 拼接逻辑
+    let url = if key.starts_with("sctp") {
+        format!("https://{}.push.ft07.com/send", key)
+    } else {
+        format!("https://sctapi.ftqq.com/{}.send", key)
+    };
     let client = reqwest::Client::new();
     let res = client.post(&url)
         .header(CONTENT_TYPE, "application/x-www-form-urlencoded")
