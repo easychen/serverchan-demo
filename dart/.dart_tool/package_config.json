@@ -3,67 +3,67 @@
   "packages": [
     {
       "name": "async",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/async-2.11.0",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/async-2.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/collection-1.17.2",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/collection-1.17.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "dart_dotenv",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/dart_dotenv-1.0.1",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/dart_dotenv-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/http-0.13.5",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/http-0.13.5",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.2",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/meta-1.9.1",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/meta-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/path-1.8.3",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/path-1.8.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "source_span",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/source_span-1.10.0",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.2.0",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/string_scanner-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "term_glyph",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.1",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.2",
+      "rootUri": "file:///Users/easy/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -74,7 +74,8 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-07-16T15:57:39.967090Z",
+  "generated": "2024-09-30T16:28:48.375496Z",
   "generator": "pub",
-  "generatorVersion": "2.18.7"
+  "generatorVersion": "3.4.4",
+  "pubCache": "file:///Users/easy/.pub-cache"
 }
