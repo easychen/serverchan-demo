@@ -1,11 +1,18 @@
 import os
 import requests
+import re
 
 def sc_send(sendkey, title, desp='', options=None):
     if options is None:
         options = {}
+    # 判断 sendkey 是否以 'sctp' 开头，并提取数字构造 URL
     if sendkey.startswith('sctp'):
-        url = f'https://{sendkey}.push.ft07.com/send'
+        match = re.match(r'sctp(\d+)t', sendkey)
+        if match:
+            num = match.group(1)
+            url = f'https://{num}.push.ft07.com/send/{sendkey}.send'
+        else:
+            raise ValueError('Invalid sendkey format for sctp')
     else:
         url = f'https://sctapi.ftqq.com/{sendkey}.send'
     params = {
@@ -28,5 +35,5 @@ with open(os.path.join(os.path.dirname(__file__), '..', '.env'), 'r') as f:
         data[key] = value
 key = data['SENDKEY']
 
-ret = sc_send(key, '主人服务器宕机了', '第一行\n\n第二行')
+ret = sc_send(key, '主人服务器宕机了 via python', '第一行\n\n第二行')
 print(ret)

@@ -21,3 +21,16 @@
 将`.env.example`改名为`.env`，填入sendkey，即可测试。
 
 > 注意：Dart中读取.env文件失败，可以手工在main.dart中手工写入sendkey测试。
+
+### 运行命令
+
+- php send.php
+- node send.js 
+- python send.py 
+-  java Main.java 
+- go run main.go 
+- cargo run
+- bash send.sh 
+- swift main.swift 
+- dart run main.dart
+- gcc main.c -o main -lcurl && ./main

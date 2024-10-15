@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strings"
 )
 
@@ -24,7 +25,7 @@ func main() {
 
 	key := m["SENDKEY"]
 
-	ret := scSend("主人服务器宕机了", "第一行\n\n第二行", key)
+	ret := scSend("主人服务器宕机了 via go", "第一行\n\n第二行", key)
 	fmt.Println(ret)
 }
 
@@ -54,7 +55,15 @@ func scSend(text string, desp string, key string) string {
 	// 根据 sendkey 是否以 "sctp" 开头决定 API 的 URL
 	var apiUrl string
 	if strings.HasPrefix(key, "sctp") {
-		apiUrl = fmt.Sprintf("https://%s.push.ft07.com/send", key)
+		// 使用正则表达式提取数字部分
+		re := regexp.MustCompile(`sctp(\d+)t`)
+		matches := re.FindStringSubmatch(key)
+		if len(matches) > 1 {
+			num := matches[1]
+			apiUrl = fmt.Sprintf("https://%s.push.ft07.com/send/%s.send", num, key)
+		} else {
+			return "Invalid sendkey format for sctp"
+		}
 	} else {
 		apiUrl = fmt.Sprintf("https://sctapi.ftqq.com/%s.send", key)
 	}

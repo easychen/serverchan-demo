@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 class Program
@@ -18,10 +19,24 @@ class Program
     static async Task<string> ScSend(string text, string desp = "", string key = "[SENDKEY]")
     {
         var postData = $"text={Uri.EscapeDataString(text)}&desp={Uri.EscapeDataString(desp)}";
-         // 根据 sendkey 的前缀选择不同的 API URL
-        var url = key.StartsWith("sctp") 
-            ? $"https://{key}.push.ft07.com/send" 
-            : $"https://sctapi.ftqq.com/{key}.send";
+        // 判断 sendkey 是否以 "sctp" 开头并提取数字部分
+        if (key.StartsWith("sctp"))
+        {
+            var match = Regex.Match(key, @"^sctp(\d+)t");
+            if (match.Success)
+            {
+                var num = match.Groups[1].Value;
+                url = $"https://{num}.push.ft07.com/send/{key}.send";
+            }
+            else
+            {
+                throw new ArgumentException("Invalid key format for sctp.");
+            }
+        }
+        else
+        {
+            url = $"https://sctapi.ftqq.com/{key}.send";
+        }
 
         var httpClient = new HttpClient();
         var request = new HttpRequestMessage(HttpMethod.Post, url);

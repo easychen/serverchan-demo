@@ -2,11 +2,25 @@ import Foundation
 
 func sc_send(text: String, desp: String = "", key: String = "[SENDKEY]") -> String {
     let urlString: String
+    let regex = try! NSRegularExpression(pattern: "^sctp(\\d+)t", options: [])
+
     if key.hasPrefix("sctp") {
-        urlString = "https://\(key).push.ft07.com/send"
+    if let match = regex.firstMatch(in: key, options: [], range: NSRange(location: 0, length: key.utf16.count)) {
+        let numRange = match.range(at: 1)
+        if let numRange = Range(numRange, in: key) {
+            let num = key[numRange]
+            urlString = "https://\(num).push.ft07.com/send/\(key).send"
+        } else {
+            // 处理错误：没有提取到数字
+            fatalError("Invalid key format")
+        }
     } else {
-        urlString = "https://sctapi.ftqq.com/\(key).send"
+        // 处理错误：正则匹配失败
+        fatalError("Invalid key format")
     }
+} else {
+    urlString = "https://sctapi.ftqq.com/\(key).send"
+}
     
     guard let url = URL(string: urlString) else {
         print("Invalid URL")
@@ -45,5 +59,5 @@ for line in lines {
     }
 }
 
-let ret = sc_send(text: "主人服务器宕机了", desp: "第一行\n\n第二行", key: key)
+let ret = sc_send(text: "主人服务器宕机了 via swift", desp: "第一行\n\n第二行", key: key)
 print(ret)

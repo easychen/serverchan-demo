@@ -29,9 +29,17 @@ void sc_send(SCData* data) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
     if (curl) {
-        // 判断 sendkey 是否以 "sctp" 开头，并选择对应的 URL
+        // 判断 sendkey 是否以 "sctp" 开头，并提取后续数字
         if (strncmp(data->key, "sctp", 4) == 0) {
-            snprintf(url, MAX_BUFFER_SIZE, "https://%s.push.ft07.com/send", data->key);
+            int num;
+            if (sscanf(data->key, "sctp%dt", &num) == 1) {
+                snprintf(url, MAX_BUFFER_SIZE, "https://%d.push.ft07.com/send/%s.send", num, data->key);
+            } else {
+                fprintf(stderr, "Invalid sendkey format for sctp\n");
+                curl_easy_cleanup(curl);
+                curl_global_cleanup();
+                return;
+            }
         } else {
             snprintf(url, MAX_BUFFER_SIZE, "https://sctapi.ftqq.com/%s.send", data->key);
         }
@@ -75,7 +83,7 @@ int main() {
 
     if (sendkey) {
         SCData data;
-        data.text = "主人服务器宕机了";
+        data.text = "主人服务器宕机了 via c";
         data.desp = "第一行\n\n第二行";
         data.key = sendkey;
 
